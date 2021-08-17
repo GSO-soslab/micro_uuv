@@ -15,7 +15,7 @@
     <link name="gps_tail_link"/>
 
     <joint name="imu_xsens_joint" type="fixed">
-        <origin xyz="0 0 -0.06" rpy="3.141592653589793 0 0"/>
+        <origin xyz="0 0 -0.032" rpy="3.141592653589793 0 0"/>
         <parent link="base_link"/>
         <child link="imu_xsens_link"/>
     </joint>
@@ -27,31 +27,31 @@
     </joint>
 
     <joint name="battery_joint" type="fixed">
-        <origin xyz="-0.2 0 0.02" rpy="0 0 0"/>
+        <origin xyz="-0.4 0 0.02" rpy="0 0 0"/>
         <parent link="base_link"/>
         <child link="battery_link"/>
     </joint>
 
     <joint name="payload_joint" type="fixed">
-        <origin xyz="-0.7 0 0" rpy="0 0 0"/>
+        <origin xyz="-0.7639 0 0" rpy="0 0 0"/>
         <parent link="base_link"/>
         <child link="payload_link"/>
     </joint>
 
     <joint name="port_transducer_joint" type="fixed">
-        <origin xyz="0 0.1 -0.089" rpy="0.0 0.523598767 1.5707963"/>
+        <origin xyz="0 0.06952 -0.05926" rpy="0.0 0.523598767 1.5707963"/>
         <parent link="payload_link"/>
         <child link="port_transducer_link"/>
     </joint>
 
     <joint name="starboard_transducer_joint" type="fixed">
-        <origin xyz="0 -0.1 -0.089" rpy="0.0 0.523598767 -1.5707963"/>
+        <origin xyz="0 -0.0652 -0.05926" rpy="0.0 0.523598767 -1.5707963"/>
         <parent link="payload_link"/>
         <child link="starboard_transducer_link"/>
     </joint>
 
     <joint name="dvl_joint" type="fixed">
-        <origin xyz="-0.22 0 -0.08" rpy="0.0 0.0 3.141592653589793"/>
+        <origin xyz="-0.32036 0 -0.04604" rpy="0.0 0.0 3.141592653589793"/>
         <parent link="payload_link"/>
         <child link="dvl_link"/>
     </joint>
