@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="micro_uuv" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <link name="base_link"/>
+    <link name="imu_xsens_link"/>
+    <link name="imu_spartan_link"/>
+    <link name="battery_link"/>
+    <link name="payload_link"/>
+    <link name="port_transducer_link"/>
+    <link name="starboard_transducer_link"/>
+    <link name="dvl_link"/>
+    <link name="fin_link"/>
+    <link name="gps_fin_link"/>
+    <link name="tail_link"/>
+    <link name="gps_tail_link"/>
+
+    <joint name="imu_xsens_joint" type="fixed">
+        <origin xyz="0 0 -0.06" rpy="3.141592653589793 0 0"/>
+        <parent link="base_link"/>
+        <child link="imu_xsens_link"/>
+    </joint>
+
+    <joint name="imu_spartan_joint" type="fixed">
+        <origin xyz="0.15 0 0.07" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="imu_spartan_link"/>
+    </joint>
+
+    <joint name="battery_joint" type="fixed">
+        <origin xyz="-0.2 0 0.02" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="battery_link"/>
+    </joint>
+
+    <joint name="payload_joint" type="fixed">
+        <origin xyz="-0.7 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="payload_link"/>
+    </joint>
+
+    <joint name="port_transducer_joint" type="fixed">
+        <origin xyz="0 0.1 -0.089" rpy="0.0 0.523598767 1.5707963"/>
+        <parent link="payload_link"/>
+        <child link="port_transducer_link"/>
+    </joint>
+
+    <joint name="starboard_transducer_joint" type="fixed">
+        <origin xyz="0 -0.1 -0.089" rpy="0.0 0.523598767 -1.5707963"/>
+        <parent link="payload_link"/>
+        <child link="starboard_transducer_link"/>
+    </joint>
+
+    <joint name="dvl_joint" type="fixed">
+        <origin xyz="-0.22 0 -0.08" rpy="0.0 0.0 3.141592653589793"/>
+        <parent link="payload_link"/>
+        <child link="dvl_link"/>
+    </joint>
+
+    <joint name="fin_joint" type="fixed">
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <parent link="payload_link"/>
+        <child link="fin_link"/>
+    </joint>
+
+    <joint name="gps_fin_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="payload_link"/>
+        <child link="gps_fin_link"/>
+    </joint>
+
+    <joint name="tail_joint" type="fixed">
+        <origin xyz="-1.2 0 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="tail_link"/>
+    </joint>
+
+    <joint name="gps_tail_joint" type="fixed">
+        <origin xyz="-0.04 0.0 0.12" rpy="0 0 0"/>
+        <parent link="tail_link"/>
+        <child link="gps_tail_link"/>
+    </joint>
+
+</robot>

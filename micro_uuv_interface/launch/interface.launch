@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node
+            pkg="micro_uuv_interface"
+            type="interface_node"
+            name="moos"
+            args="-m $(find micro_uuv_interface)/config/ppp-bridge.moos"
+            output="screen"
+    />
+</launch>

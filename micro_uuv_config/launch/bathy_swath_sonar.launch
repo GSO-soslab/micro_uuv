@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="bathy_sonar_ros" type="bathy_sonar_ros_node" name="swath_ros" output="screen">
+        <rosparam command="load" file="$(find micro_uuv_config)/param/bathy_swath_sonar.yaml"/>
+    </node>
+
+</launch>

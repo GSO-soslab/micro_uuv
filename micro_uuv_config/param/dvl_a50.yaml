@@ -1,0 +1,2 @@
+port: /dev/ttyTHS2
+frame_id: dvl_link

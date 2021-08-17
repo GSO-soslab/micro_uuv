@@ -1,0 +1,3 @@
+run_swath_rt: false
+channel_1_frame_id: port_transducer_link
+channel_2_frame_id: starboard_transducer_link

@@ -1,0 +1,33 @@
+//------------------------------------------------
+// File: bravo.bhv
+// Name: Emir Cem Gezer
+// Date: Dec 29, 2020
+//------------------------------------------------
+
+ServerHost = beaglebone.ppp
+ServerPort = 9000
+
+Community    = uuuv
+MOOSTimeWarp = 1
+
+Processconfig = ANTLER
+{
+  MSBetweenLaunches = 100
+   
+  // Run = MOOSDB           @ NewConsole = false
+  Run = iRosBridge  @ NewConsole = false
+  Run = uMS              @ NewConsole = false 
+}
+
+
+ProcessConfig = iRosBridge
+{
+  AppTick    = 500
+  CommsTick  = 500
+}
+
+ProcessConfig = uMS
+{
+  AppTick    = 4
+  CommsTick  = 4
+}
