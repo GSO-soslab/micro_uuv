@@ -242,3 +242,8 @@ tags
 */**/.cmake-build*
 */**/cmake-build
 */**/.idea
+
+
+*/**/*.c.o
+*/**/*.cpp.o
+*/**/lib*.a
