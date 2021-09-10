@@ -100,7 +100,6 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
@@ -158,8 +157,6 @@ Temporary Items
 ### ROS ###
 devel/
 logs/
-build/
-bin/
 msg_gen/
 srv_gen/
 msg/*Action.msg
