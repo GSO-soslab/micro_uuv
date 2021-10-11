@@ -7,4 +7,6 @@
 
     <include file="$(find micro_uuv_config)/launch/multimaster.launch"/>
 
+    <include file="$(find micro_uuv_config)/launch/ina260.launch"/>
+
 </launch>
