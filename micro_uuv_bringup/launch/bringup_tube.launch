@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find micro_uuv_config)/launch/xsens_mti.launch"/>
+
+    <include file="$(find micro_uuv_interface)/launch/interface.launch"/>
+
+    <include file="$(find micro_uuv_interface)/launch/multimaster.launch"/>
+
+</launch>

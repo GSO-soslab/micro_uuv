@@ -1,10 +1,10 @@
 //------------------------------------------------
-// File: bravo.bhv
+// File: bridge.moos
 // Name: Emir Cem Gezer
 // Date: Dec 29, 2020
 //------------------------------------------------
 
-ServerHost = beaglebone.ppp
+ServerHost = 192.168.1.213
 ServerPort = 9000
 
 Community    = uuuv
@@ -13,10 +13,10 @@ MOOSTimeWarp = 1
 Processconfig = ANTLER
 {
   MSBetweenLaunches = 100
-   
+
   // Run = MOOSDB           @ NewConsole = false
   Run = iRosBridge  @ NewConsole = false
-  Run = uMS              @ NewConsole = false 
+  Run = uMS         @ NewConsole = false
 }
 
 

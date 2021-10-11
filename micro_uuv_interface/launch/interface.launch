@@ -4,7 +4,7 @@
             pkg="micro_uuv_interface"
             type="interface_node"
             name="moos"
-            args="-m $(find micro_uuv_interface)/config/ppp-bridge.moos"
+            args="-m $(find micro_uuv_interface)/config/bridge.moos"
             output="screen"
     />
 </launch>

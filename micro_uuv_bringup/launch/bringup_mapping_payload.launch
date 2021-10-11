@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find micro_uuv_config)/launch/bathty_swath_sonar.launch"/>
+
+    <include file="$(find micro_uuv_config)/launch/gps.launch"/>
+
+    <include file="$(find micro_uuv_config)/launch/dvl_a50.launch"/>
+
+    <include file="$(find micro_uuv_config)/launch/multimaster.launch"/>
+
+</launch>

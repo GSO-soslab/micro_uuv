@@ -15,6 +15,7 @@ add_message_files(
     IvpHelmState.msg
     Nav.msg
     Pressure.msg
+    Power.msg
     StringMap.msg
     WayPoint.msg
 )
