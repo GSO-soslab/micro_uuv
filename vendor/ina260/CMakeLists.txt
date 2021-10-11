@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+	micro_uuv_msgs
 )
 
 ################################################
@@ -64,7 +65,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 catkin_package(
-  CATKIN_DEPENDS roscpp std_msgs
+  CATKIN_DEPENDS
+		roscpp
+	  std_msgs
+		micro_uuv_msgs
 )
 
 ###########
@@ -82,6 +86,7 @@ add_executable(${PROJECT_NAME}_node
   src/i2c_driver.cpp
   src/ina260.cpp
   src/ina260_node.cpp
+	src/ina260ros.cpp
 )
 
 EXECUTE_PROCESS( COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE )

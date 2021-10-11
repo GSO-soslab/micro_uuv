@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.0.2)
 project(micro_uuv_msgs)
 
 find_package(catkin REQUIRED COMPONENTS
-  auv_msgs
   message_generation
   sensor_msgs
   std_msgs
@@ -33,8 +32,10 @@ add_service_files(
 
 generate_messages(
   DEPENDENCIES
-    auv_msgs
     sensor_msgs
     std_msgs
 )
 
+catkin_package(
+  CATKIN_DEPENDS message_runtime sensor_msgs std_msgs
+)

@@ -12,23 +12,21 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   sensor_msgs
-  auv_msgs
-  message_generation
   tf2
   dvl_a50_ros
+  micro_uuv_msgs
 )
 
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES micro_uuv_interface 
+#  LIBRARIES micro_uuv_interface
   CATKIN_DEPENDS
     roscpp
     std_msgs
     sensor_msgs
-    auv_msgs
-    message_runtime
     tf2
     dvl_a50_ros
+    micro_uuv_msgs
 #  DEPENDS system_lib
 )
 

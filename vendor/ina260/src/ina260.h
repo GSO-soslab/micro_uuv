@@ -39,8 +39,8 @@
 #include <fcntl.h>
 // #include <linux/i2c.h>
 // #include <linux/i2c-dev.h>
-#include <stdint.h>
-#include <stdio.h>
+#include "cstdint"
+#include "cstdio"
 // #include <sys/ioctl.h>
 #include <unistd.h>
 
