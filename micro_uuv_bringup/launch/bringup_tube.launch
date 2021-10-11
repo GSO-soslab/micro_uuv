@@ -5,6 +5,6 @@
 
     <include file="$(find micro_uuv_interface)/launch/interface.launch"/>
 
-    <include file="$(find micro_uuv_interface)/launch/multimaster.launch"/>
+    <include file="$(find micro_uuv_config)/launch/multimaster.launch"/>
 
 </launch>
