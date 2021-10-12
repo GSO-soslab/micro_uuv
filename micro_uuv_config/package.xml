@@ -49,7 +49,9 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-
+  <depend>gpsd_client</depend>
+  <depend>bathy_sonar_ros</depend>
+  <depend>ina260ros</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
