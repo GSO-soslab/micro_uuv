@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node pkg="dvl_a50_ros" type="dvl_a50_ros_node" name="dvl_node" output="screen">
+    <node pkg="waterlinked_dvl" type="waterlinked_dvl_node" name="dvl_node" output="screen">
         <rosparam command="load" file="$(find micro_uuv_config)/param/dvl_a50.yaml"/>
     </node>
 

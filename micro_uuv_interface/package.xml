@@ -14,7 +14,7 @@
   <depend>sensor_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>tf2</depend>
-  <depend>dvl_a50_ros</depend>
+  <depend>waterlinked_dvl</depend>
   <depend>micro_uuv_msgs</depend>
 
   <export>

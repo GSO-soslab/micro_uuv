@@ -13,8 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   tf2
-  dvl_a50_ros
   micro_uuv_msgs
+  waterlinked_dvl
 )
 
 catkin_package(
@@ -25,8 +25,8 @@ catkin_package(
     std_msgs
     sensor_msgs
     tf2
-    dvl_a50_ros
     micro_uuv_msgs
+    waterlinked_dvl
 #  DEPENDS system_lib
 )
 

@@ -23,7 +23,7 @@ namespace soslab {
         m_mag_publisher = m_pnh.advertise<sensor_msgs::MagneticField>("imu/mag",1000);
 
         // Subscribers
-        m_dvl_subscriber = m_pnh.subscribe("dvl",1000, &ROSNode::dvlCallback, this);
+        m_dvl_subscriber = m_pnh.subscribe("transducer_report",1000, &ROSNode::dvlCallback, this);
 
         // Services
         m_wpt_service = m_pnh.advertiseService("send_waypoint", &ROSNode::wayPointService, this);
@@ -239,11 +239,11 @@ namespace soslab {
         m_pressure_publisher.publish(m_pressure);
     }
 
-    void ROSNode::dvlCallback(const dvl_a50_ros::DVL::ConstPtr &msg) {
+    void ROSNode::dvlCallback(const waterlinked_dvl::TransducerReportStamped::ConstPtr &msg) {
         m_pool->dvl.time = msg->header.stamp.toSec();
-        m_pool->dvl.x = msg->velocity.x;
-        m_pool->dvl.y = msg->velocity.y;
-        m_pool->dvl.z = msg->velocity.z;
+        m_pool->dvl.x = msg->report.vx;
+        m_pool->dvl.y = msg->report.vy;
+        m_pool->dvl.z = msg->report.vz;
         m_moosNode->publishDvl();
     }
 }

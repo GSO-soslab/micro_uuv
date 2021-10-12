@@ -19,7 +19,7 @@
 #include "micro_uuv_msgs/IvpHelmState.h"
 #include "micro_uuv_msgs/Gps.h"
 #include "micro_uuv_msgs/Pressure.h"
-#include "dvl_a50_ros/DVL.h"
+#include "waterlinked_dvl/TransducerReportStamped.h"
 
 // SRV
 #include "micro_uuv_msgs/SetWayPoint.h"
@@ -97,7 +97,7 @@ namespace soslab {
         bool manualOverideService(std_srvs::SetBool::Request& req,
                                   std_srvs::SetBool::Response& res);
 
-        void dvlCallback(const dvl_a50_ros::DVL::ConstPtr& msg);
+        void dvlCallback(const waterlinked_dvl::TransducerReportStamped::ConstPtr& msg);
 
     public:
 
@@ -124,7 +124,7 @@ namespace soslab {
         void PublishMag();
 
     };
-    
+
 }
 
 #endif

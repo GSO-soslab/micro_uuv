@@ -1,0 +1,3 @@
+[submodule "vendor/waterlinked_dvl_ros"]
+	path = vendor/waterlinked_dvl_ros
+	url = https://github.com/GSO-soslab/waterlinked_dvl_ros
