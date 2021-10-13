@@ -7,6 +7,8 @@
 
     <include file="$(find micro_uuv_config)/launch/dvl_a50.launch"/>
 
-    <include file="$(find micro_uuv_config)/launch/multimaster.launch"/>
+    <include file="$(find micro_uuv_config)/launch/multimaster.launch">
+        <arg name="interface_address" default="192.168.1.212"/>
+    </include>
 
 </launch>
