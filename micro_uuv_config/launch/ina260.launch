@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node pkg="ina260ros" type="ina260_node" name="ina260_node" launch-prefix="sudo"/>
+    <node pkg="ina260ros" type="ina260_node" name="ina260ros_node" launch-prefix="sudo"/>
 
 </launch>
