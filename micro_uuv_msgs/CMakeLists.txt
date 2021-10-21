@@ -13,6 +13,7 @@ add_message_files(
     Gps.msg
     IvpHelmState.msg
     Nav.msg
+    NMEA.msg
     Pressure.msg
     StringMap.msg
     WayPoint.msg

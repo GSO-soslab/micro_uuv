@@ -246,6 +246,7 @@ bool XdaInterface::prepare()
 	if (!m_device->readEmtsAndDeviceConfiguration())
 		return handleError("Could not read device configuration");
 
+	
 	ROS_INFO("Measuring ...");
 	if (!m_device->gotoMeasurement())
 		return handleError("Could not put device into measurement mode");
