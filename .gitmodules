@@ -4,3 +4,6 @@
 [submodule "vendor/ina260ros"]
 	path = vendor/ina260ros
 	url = https://github.com/GSO-soslab/ina260ros
+[submodule "vendor/xsens_mti_ros_driver"]
+	path = vendor/xsens_mti_ros_driver
+	url = https://github.com/GSO-soslab/xsens_mti_ros_driver
