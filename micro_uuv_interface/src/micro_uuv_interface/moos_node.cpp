@@ -247,62 +247,6 @@ void MOOSNode::Translate(CMOOSMsg &msg) {
         m_pool->ps._fill.status |= 1;
     }
 
-
-    // microstrain IMU
-    else if (key == "MS_ROLL") {
-        m_pool->ms_imu.roll = msg.GetDouble();
-    } else if (key == "MS_PITCH") {
-        m_pool->ms_imu.pitch = msg.GetDouble();
-    } else if (key == "MS_YAW") {
-        m_pool->ms_imu.yaw = msg.GetDouble();
-    } else if (key == "MS_HEADING") {
-        m_pool->ms_imu.heading = msg.GetDouble();
-    } else if (key == "MS_X_ACCEL") {
-        m_pool->ms_imu.x_accel = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.x_accel |= 1;
-    } else if (key == "MS_Y_ACCEL") {
-        m_pool->ms_imu.y_accel = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.y_accel |= 1;
-    } else if (key == "MS_Z_ACCEL") {
-        m_pool->ms_imu.z_accel = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.z_accel |= 1;
-    } else if (key == "MS_X_GYRO") {
-        m_pool->ms_imu.x_gyro = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.x_gyro |= 1;
-    } else if (key == "MS_Y_GYRO") {
-        m_pool->ms_imu.y_gyro = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.y_gyro |= 1;
-    } else if (key == "MS_Z_GYRO") {
-        m_pool->ms_imu.z_gyro = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.z_gyro |= 1;
-    } else if (key == "MS_W_QUAT") {
-        m_pool->ms_imu.w_quat = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.w_quat |= 1;
-    } else if (key == "MS_X_QUAT") {
-        m_pool->ms_imu.x_quat = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.x_quat |= 1;
-    } else if (key == "MS_Y_QUAT") {
-        m_pool->ms_imu.y_quat = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.y_quat |= 1;
-    } else if (key == "MS_Z_QUAT") {
-        m_pool->ms_imu.z_quat = msg.GetDouble();
-        m_pool->ms_imu._fill_extended.z_quat |= 1;
-    }
-
-    else if (key == "MSRAW_X_MAG") {
-        m_pool->mag.x = msg.GetDouble();
-        m_pool->mag._fill.x |= 1;
-        m_pool->mag.time = msg.m_dfTime;
-    } else if (key == "MSRAW_Y_MAG") {
-        m_pool->mag.y = msg.GetDouble();
-        m_pool->mag._fill.y |= 1;
-        m_pool->mag.time = msg.m_dfTime;
-    } else if (key == "MSRAW_Z_MAG") {
-        m_pool->mag.z = msg.GetDouble();
-        m_pool->mag._fill.z |= 1;
-        m_pool->mag.time = msg.m_dfTime;
-    }
-
         // GPS
     else if (key == "GPS_ANTENNA_OKAY") {
         m_pool->gps.antenna_okay = (int)msg.GetDouble();
@@ -351,10 +295,6 @@ void MOOSNode::Translate(CMOOSMsg &msg) {
         m_pool->ps.time = msg.m_dfTime;
     }
 
-    if(key.rfind("MS_", 0) == 0) {
-        m_pool->ms_imu.time = msg.m_dfTime;
-    }
-
     if(key.rfind("IVPHELM_", 0) == 0) {
         m_pool->helm_status.time = msg.m_dfTime;
     }
@@ -384,11 +324,6 @@ void MOOSNode::Translate(CMOOSMsg &msg) {
     if(TEST_IMU_FILL(m_pool->imu)) {
         m_rosNode->PublishImu();
         FLUSH_FILL(m_pool->imu);
-    }
-
-    if(TEST_IMU_FILL_EXTENDED(m_pool->ms_imu)) {
-        m_rosNode->PublishMsImu();
-        FLUSH_FILL_EXTENDED(m_pool->ms_imu);
     }
 
     if(TEST_GPS_FILL(m_pool->gps)) {

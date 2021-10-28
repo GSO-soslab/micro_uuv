@@ -13,24 +13,29 @@ namespace soslab {
         m_ivp_helm_state_msg.header.seq = 0;
 
         // Publishers
-        m_nav_publisher = m_pnh.advertise<micro_uuv_msgs::Nav>("pnav_state", 1000);
-        m_ivp_helm_state_publisher = m_pnh.advertise<micro_uuv_msgs::IvpHelmState>("helm_state", 1000);
-        m_imu_publisher = m_pnh.advertise<sensor_msgs::Imu>("embedded_imu/data", 1000);
-        m_ms_imu_publisher = m_pnh.advertise<sensor_msgs::Imu>("imu/data", 1000);
-        m_gps_publisher = m_pnh.advertise<micro_uuv_msgs::Gps>("gps",1000);
+        m_nav_publisher = m_nh.advertise<micro_uuv_msgs::Nav>("pnav_state", 1000);
+        m_ivp_helm_state_publisher = m_nh.advertise<micro_uuv_msgs::IvpHelmState>("helm_state", 1000);
+        m_imu_publisher = m_nh.advertise<sensor_msgs::Imu>("imu/data", 1000);
+        m_gps_publisher = m_nh.advertise<micro_uuv_msgs::Gps>("gps",1000);
+        m_fix_publisher = m_nh.advertise<sensor_msgs::NavSatFix>("fix",1000);
 
-        m_pressure_publisher = m_pnh.advertise<micro_uuv_msgs::Pressure>("ps",1000);
-        m_mag_publisher = m_pnh.advertise<sensor_msgs::MagneticField>("imu/mag",1000);
+        m_pressure_publisher = m_nh.advertise<micro_uuv_msgs::Pressure>("ps",1000);
+        m_mag_publisher = m_nh.advertise<sensor_msgs::MagneticField>("imu/mag",1000);
 
         // Subscribers
-        m_dvl_subscriber = m_pnh.subscribe("transducer_report",1000, &ROSNode::dvlCallback, this);
+        m_dvl_subscriber = m_nh.subscribe("transducer_report",1000, &ROSNode::dvlCallback, this);
 
         // Services
-        m_wpt_service = m_pnh.advertiseService("send_waypoint", &ROSNode::wayPointService, this);
-        m_dep_service = m_pnh.advertiseService("send_depth", &ROSNode::depthService, this);
-        m_helm_state_service = m_pnh.advertiseService("set_helm_state", &ROSNode::ivpHelmConditionService, this);
-        m_manual_overide_service = m_pnh.advertiseService("set_manual_overide", &ROSNode::manualOverideService, this);
-        m_calibration_service = m_pnh.advertiseService("start_calibration", &ROSNode::startCalibration, this);
+        m_wpt_service = m_nh.advertiseService("send_waypoint", &ROSNode::wayPointService, this);
+        m_dep_service = m_nh.advertiseService("send_depth", &ROSNode::depthService, this);
+        m_helm_state_service = m_nh.advertiseService("set_helm_state", &ROSNode::ivpHelmConditionService, this);
+        m_manual_overide_service = m_nh.advertiseService("set_manual_overide", &ROSNode::manualOverideService, this);
+        m_calibration_service = m_nh.advertiseService("start_calibration", &ROSNode::startCalibration, this);
+
+
+        m_pnh.param<std::string>("imu_frame_id", m_imu_msg.header.frame_id, "imu_moos_link");
+        m_pnh.param<std::string>("gps_frame_id", m_gps_msg.header.frame_id, "gps_moos_link");
+        m_pnh.param<std::string>("gps_frame_id", m_fix_msg.header.frame_id, "gps_moos_link");
 
     }
 
@@ -146,28 +151,6 @@ namespace soslab {
         m_imu_publisher.publish(m_imu_msg);
     }
 
-
-    void ROSNode::PublishMsImu() {
-        m_ms_imu_msg.header.seq += 1;
-
-        m_ms_imu_msg.header.stamp = ros::Time().fromSec(m_pool->ms_imu.time);
-        m_ms_imu_msg.orientation.w = m_pool->ms_imu.w_quat;
-        m_ms_imu_msg.orientation.x = m_pool->ms_imu.x_quat;
-        m_ms_imu_msg.orientation.y = m_pool->ms_imu.y_quat;
-        m_ms_imu_msg.orientation.z = m_pool->ms_imu.z_quat;
-
-        // TODO: This comes as velocity, maybe we should turn this into acceleration
-        m_ms_imu_msg.linear_acceleration.x = m_pool->ms_imu.x_accel;
-        m_ms_imu_msg.linear_acceleration.y = m_pool->ms_imu.z_accel;
-        m_ms_imu_msg.linear_acceleration.z = m_pool->ms_imu.y_accel;
-
-        m_ms_imu_msg.angular_velocity.x = m_pool->ms_imu.x_gyro;
-        m_ms_imu_msg.angular_velocity.y = m_pool->ms_imu.y_gyro;
-        m_ms_imu_msg.angular_velocity.z = m_pool->ms_imu.z_gyro;
-
-        m_ms_imu_publisher.publish(m_ms_imu_msg);
-    }
-
     void ROSNode::PublishGps() {
         m_gps_msg.header.seq += 1;
         m_gps_msg.header.stamp = ros::Time().fromSec(m_pool->gps.time);
@@ -185,6 +168,14 @@ namespace soslab {
         m_gps_msg.y = m_pool->gps.y;
 
         m_gps_publisher.publish(m_gps_msg);
+
+
+        m_fix_msg.header = m_gps_msg.header;
+        m_fix_msg.longitude = m_gps_msg.longitude;
+        m_fix_msg.latitude = m_gps_msg.latitude;
+
+        m_fix_publisher.publish(m_fix_msg);
+
     }
 
     void ROSNode::PublishIvpHelmState() {

@@ -6,5 +6,7 @@
             name="moos"
             args="-m $(find micro_uuv_interface)/config/bridge.moos"
             output="screen"
-    />
+    >
+        <rosparam command="load" file="$(find micro_uuv_interface)/config/bridge.yaml"/>
+    </node>
 </launch>

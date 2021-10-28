@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="interface_address" default="127.0.0.1"/>
+    <arg name="host_type" default="tube"/>
+
 
     <node name="master_sync" pkg="fkie_master_sync" type="master_sync">
-
+        <rosparam command="load" file="$(find micro_uuv_config)/param/multimaster/master_sync_$(arg host_type).yaml"/>
     </node>
 
     <node name="master_discovery" pkg="fkie_master_discovery" type="master_discovery">

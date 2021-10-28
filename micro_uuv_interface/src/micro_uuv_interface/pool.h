@@ -296,9 +296,6 @@ namespace soslab {
 
         imu_t imu;
 
-        //!@note: microstrain imu
-        imu_t ms_imu;
-
         dvl_t dvl;
 
         mag_t mag;

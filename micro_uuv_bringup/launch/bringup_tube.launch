@@ -3,12 +3,15 @@
 
     <include file="$(find micro_uuv_config)/launch/xsens_mti.launch"/>
 
-    <include file="$(find micro_uuv_interface)/launch/interface.launch"/>
+    <include file="$(find micro_uuv_config)/launch/interface.launch"/>
 
     <include file="$(find micro_uuv_config)/launch/multimaster.launch">
         <arg name="interface_address" default="192.168.2.1"/>
+        <arg name="host_type" default="tube"/>
     </include>
 
     <include file="$(find micro_uuv_config)/launch/ina260.launch"/>
+
+    <include file="$(find micro_uuv_description)/launch/description.launch"/>
 
 </launch>

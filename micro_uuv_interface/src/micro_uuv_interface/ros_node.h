@@ -21,6 +21,8 @@
 #include "micro_uuv_msgs/Pressure.h"
 #include "waterlinked_dvl/TransducerReportStamped.h"
 
+#include "sensor_msgs/NavSatFix.h"
+
 // SRV
 #include "micro_uuv_msgs/SetWayPoint.h"
 #include "micro_uuv_msgs/SetDepth.h"
@@ -34,9 +36,12 @@ namespace soslab {
     class ROSNode {
     private:
         micro_uuv_msgs::Nav m_nav_msg;
+
         micro_uuv_msgs::Gps m_gps_msg;
+
+        sensor_msgs::NavSatFix m_fix_msg;
+
         sensor_msgs::Imu m_imu_msg;
-        sensor_msgs::Imu m_ms_imu_msg;
 
         sensor_msgs::MagneticField m_mag;
 
@@ -53,9 +58,9 @@ namespace soslab {
 
         ros::Publisher m_imu_publisher;
 
-        ros::Publisher m_ms_imu_publisher;
-
         ros::Publisher m_gps_publisher;
+
+        ros::Publisher m_fix_publisher;
 
         ros::Publisher m_pressure_publisher;
 
