@@ -12,6 +12,4 @@
         <arg name="host_type" default="mapping_payload"/>
     </include>
 
-    <include file="$(find micro_uuv_description)/launch/description.launch"/>
-
 </launch>
