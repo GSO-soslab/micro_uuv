@@ -1,0 +1,8 @@
+//
+// Created by cem on 27/10/2021.
+//
+
+#ifndef MICRO_UUV_RF_TELEOP_DICTIONARY_H
+#define MICRO_UUV_RF_TELEOP_DICTIONARY_H
+
+#endif //MICRO_UUV_RF_TELEOP_DICTIONARY_H
