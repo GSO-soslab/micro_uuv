@@ -8,7 +8,7 @@
     <include file="$(find micro_uuv_config)/launch/waterlinked_dvl.launch"/>
 
     <include file="$(find micro_uuv_config)/launch/multimaster.launch">
-        <arg name="interface_address" default="192.168.2.10"/>
+        <arg name="interface_address" default="payloadpi.ros"/>
         <arg name="host_type" default="mapping_payload"/>
     </include>
 

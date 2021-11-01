@@ -6,7 +6,7 @@
     <include file="$(find micro_uuv_config)/launch/interface.launch"/>
 
     <include file="$(find micro_uuv_config)/launch/multimaster.launch">
-        <arg name="interface_address" default="192.168.2.1"/>
+        <arg name="interface_address" default="tubepi.ros"/>
         <arg name="host_type" default="tube"/>
     </include>
 
