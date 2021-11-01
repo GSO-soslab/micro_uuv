@@ -7,3 +7,6 @@
 [submodule "vendor/xsens_mti_ros_driver"]
 	path = vendor/xsens_mti_ros_driver
 	url = https://github.com/GSO-soslab/xsens_mti_ros_driver
+[submodule "vendor/--force"]
+	path = vendor/--force
+	url = https://github.com/GSO-soslab/waterlinked_dvl_ros
