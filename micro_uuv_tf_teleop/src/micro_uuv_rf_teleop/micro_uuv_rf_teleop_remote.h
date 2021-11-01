@@ -15,7 +15,7 @@
 #include "geometry_msgs/Vector3Stamped.h"
 
 
-class RfRemoteOperator{
+class RfRemote{
 private:
 
     boost::shared_ptr<RfComms> m_comms;
@@ -38,7 +38,7 @@ private:
     void f_serial_callback(std::string incoming);
 
 public:
-    RfRemoteOperator();
+    RfRemote();
 
 };
 

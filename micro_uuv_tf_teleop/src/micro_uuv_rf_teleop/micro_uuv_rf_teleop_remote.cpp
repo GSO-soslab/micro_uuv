@@ -1,6 +1,6 @@
-#include "micro_uuv_rf_teleop_operator.h"
+#include "micro_uuv_rf_teleop_remote.h"
 
-#include "micro_uuv_rf_teleop_robot.h"
+#include "micro_uuv_rf_teleop.h"
 #include "std_srvs/Empty.h"
 #include "std_srvs/SetBool.h"
 #include "std_msgs/Int16.h"
@@ -10,7 +10,7 @@
 #include "chrono"
 #include "thread"
 
-RfRemoteOperator::RfRemoteOperator() :
+RfRemote::RfRemote() :
         m_nh(""),
         m_pnh("~")
 {
@@ -20,9 +20,9 @@ RfRemoteOperator::RfRemoteOperator() :
     m_comms = boost::make_shared<RfComms>(m_port, m_baud);
 
 
-    m_comms->setCallback(boost::bind(&RfRemoteOperator::f_serial_callback, this, boost::placeholders::_1));
+    m_comms->setCallback(boost::bind(&RfRemote::f_serial_callback, this, boost::placeholders::_1));
 
-    m_joy_teleop_callback = m_nh.subscribe("thrust_cmd", 10, &RfRemoteOperator::f_joy_teleop_callback, this);
+    m_joy_teleop_callback = m_nh.subscribe("thrust_cmd", 10, &RfRemote::f_joy_teleop_callback, this);
 
     m_incoming_publisher = m_nh.advertise<std_msgs::String>("incoming", 10);
     m_gps_publisher = m_nh.advertise<sensor_msgs::NavSatFix>("fix", 10);
@@ -30,7 +30,7 @@ RfRemoteOperator::RfRemoteOperator() :
     m_comms->activate();
 }
 
-void RfRemoteOperator::f_joy_teleop_callback(const geometry_msgs::Vector3Stamped::ConstPtr &msg) {
+void RfRemote::f_joy_teleop_callback(const geometry_msgs::Vector3Stamped::ConstPtr &msg) {
     NMEA data;
 
     std_srvs::SetBool bool_service;
@@ -48,7 +48,7 @@ void RfRemoteOperator::f_joy_teleop_callback(const geometry_msgs::Vector3Stamped
     m_comms->sendLine(data.get_raw());
 }
 
-void RfRemoteOperator::f_serial_callback(std::string incoming) {
+void RfRemote::f_serial_callback(std::string incoming) {
     if(!ros::ok()) {
         return;
     }

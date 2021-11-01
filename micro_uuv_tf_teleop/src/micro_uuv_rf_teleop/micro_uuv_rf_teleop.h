@@ -11,9 +11,9 @@
 #include "sensor_msgs/NavSatFix.h"
 #include "micro_uuv_msgs/NMEA.h"
 #include "std_msgs/String.h"
-#include "dictionary.h"
 
-class RfTeleopRobot{
+
+class RfTeleop{
 private:
 
     boost::shared_ptr<RfComms> m_comms;
@@ -49,7 +49,7 @@ private:
     void f_serial_callback(std::string incoming);
 
 public:
-    RfTeleopRobot();
+    RfTeleop();
 
 };
 

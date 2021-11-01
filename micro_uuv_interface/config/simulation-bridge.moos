@@ -1,0 +1,20 @@
+/-------------------------------------------------
+// NAME: Emir Cem Gezer, URI - SOSLAB
+// FILE: alpha.moos
+//-------------------------------------------------
+
+ServerHost   = localhost
+ServerPort   = 9000
+Community    = uuuv
+MOOSTimeWarp = 1
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = iRosBridge       @ NewConsole = false
+}
+ProcessConfig = iRosBridge
+{
+  AppTick    = 500
+  CommsTick  = 500
+}

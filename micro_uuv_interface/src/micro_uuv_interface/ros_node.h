@@ -19,8 +19,8 @@
 #include "micro_uuv_msgs/IvpHelmState.h"
 #include "micro_uuv_msgs/Gps.h"
 #include "micro_uuv_msgs/Pressure.h"
+#include "micro_uuv_msgs/MoosDebug.h"
 #include "waterlinked_dvl/TransducerReportStamped.h"
-
 #include "sensor_msgs/NavSatFix.h"
 
 // SRV
@@ -54,7 +54,13 @@ namespace soslab {
         ros::NodeHandle m_nh;
         ros::NodeHandle m_pnh;
 
-        ros::Publisher m_nav_publisher;
+        ros::Publisher m_pnav_publisher;
+
+        ros::Publisher m_pnav_debug_publisher;
+
+        ros::Publisher m_help_ivp_debug_publisher;
+
+        ros::Publisher m_moos_debug_publisher;
 
         ros::Publisher m_imu_publisher;
 
@@ -79,8 +85,8 @@ namespace soslab {
         /** @brief: Set helm state */
         ros::ServiceServer m_helm_state_service;
 
-        /** @brief: m_manual_overide_service */
-        ros::ServiceServer m_manual_overide_service;
+        /** @brief: m_manual_override_service */
+        ros::ServiceServer m_manual_override_service;
 
         ros::ServiceServer m_calibration_service;
 
@@ -99,8 +105,8 @@ namespace soslab {
 
         bool startCalibration(std_srvs::Empty::Request& req, std_srvs::Empty::Response& res);
 
-        bool manualOverideService(std_srvs::SetBool::Request& req,
-                                  std_srvs::SetBool::Response& res);
+        bool manualOverrideService(std_srvs::SetBool::Request& req,
+                                   std_srvs::SetBool::Response& res);
 
         void dvlCallback(const waterlinked_dvl::TransducerReportStamped::ConstPtr& msg);
 
@@ -127,6 +133,12 @@ namespace soslab {
         void PublishPressure();
 
         void PublishMag();
+
+        void PublishDebug();
+
+        void PublishPNavDebug();
+
+        void PublishHelmIvPDebug();
 
     };
 

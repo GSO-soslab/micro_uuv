@@ -30,7 +30,7 @@ namespace soslab {
 
         bool publishIvpHelmUpdate(const std::string& name, bool state);
 
-        bool publishManualOveride(bool state);
+        bool publishManualOverride(bool state);
 
         bool triggerCalibration();
 

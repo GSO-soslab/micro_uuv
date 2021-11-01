@@ -124,6 +124,21 @@ void MOOSNode::Translate(CMOOSMsg &msg) {
     const auto &key = msg.GetKey();
     const std::lock_guard<std::mutex> lock(m_pool->lock);
 
+
+    // Debug
+    if (key == "MOOS_DEBUG") {
+        if(msg.GetSource() == "pNav") {
+            m_pool->pnav_debug.msg = msg.GetString();
+            m_pool->pnav_debug.source = msg.GetSource();
+        } else if (msg.GetSource() == "pHelmIvP") {
+            m_pool->ivphelm_debug.msg = msg.GetString();
+            m_pool->ivphelm_debug.source = msg.GetSource();
+        } else {
+            m_pool->other_debug.msg = msg.GetString();
+            m_pool->other_debug.source = msg.GetSource();
+        }
+    }
+
     // NAV
     if (key == "NAV_X") {
         m_pool->nav.x = msg.GetDouble();
@@ -341,7 +356,22 @@ void MOOSNode::Translate(CMOOSMsg &msg) {
         FLUSH_FILL(m_pool->mag);
     }
 
+    if(!m_pool->ivphelm_debug.msg.empty()) {
+        m_rosNode->PublishHelmIvPDebug();
+        m_pool->ivphelm_debug.msg.clear();
+        m_pool->ivphelm_debug.source.clear();
+    }
 
+    if(!m_pool->pnav_debug.msg.empty()) {
+        m_rosNode->PublishPNavDebug();
+        m_pool->pnav_debug.msg.clear();
+        m_pool->pnav_debug.source.clear();
+    }
+    if(!m_pool->other_debug.msg.empty()) {
+        m_rosNode->PublishDebug();
+        m_pool->other_debug.msg.clear();
+        m_pool->other_debug.source.clear();
+    }
 }
 
 bool MOOSNode::publishDvl() {
@@ -372,6 +402,6 @@ bool MOOSNode::publishIvpHelmUpdate(const std::string& name, bool state)
 }
 
 // TODO: investigate the reason behind this typo
-bool MOOSNode::publishManualOveride(bool state) {
-    return toMOOS("MOOS_MANUAL_OVERIDE", state ? "true" : "false");
+bool MOOSNode::publishManualOverride(bool state) {
+    return toMOOS("MOOS_MANUAL_OVERRIDE", state ? "true" : "false");
 }

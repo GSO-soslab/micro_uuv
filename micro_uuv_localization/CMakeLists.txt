@@ -1,18 +1,14 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(micro_uuv_rf_teleop)
+project(micro_uuv_localization)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+# add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  sensor_msgs
-  geometry_msgs
-  micro_uuv_msgs
+  robot_localization
 )
 
 ## System dependencies are found with CMake's conventions
@@ -106,8 +102,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES micro_uuv_rf_teleop
-  CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs micro_uuv_msgs
+#  LIBRARIES micro_uuv_localization
+#  CATKIN_DEPENDS robot_localization
 #  DEPENDS system_lib
 )
 
@@ -123,36 +119,34 @@ include_directories(
 )
 
 ## Declare a C++ library
-add_library(rf_comms
-  src/${PROJECT_NAME}/rf_comms.cpp
-)
-add_dependencies(rf_comms ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/micro_uuv_localization.cpp
+# )
 
-add_library(${PROJECT_NAME}
-  src/${PROJECT_NAME}/micro_uuv_rf_teleop_robot.cpp
-  src/${PROJECT_NAME}/micro_uuv_rf_teleop_operator.cpp
-  src/${PROJECT_NAME}/nmea.cpp
-)
-add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+## Add cmake target dependencies of the library
+## as an example, code may need to be generated before libraries
+## either from message generation or dynamic reconfigure
+# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_executable(${PROJECT_NAME}_node src/micro_uuv_rf_teleop_node.cpp)
-add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME}_node
-  ${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  rf_comms
-)
+## Declare a C++ executable
+## With catkin_make all packages are built within a single CMake context
+## The recommended prefix ensures that target names across packages don't collide
+# add_executable(${PROJECT_NAME}_node src/micro_uuv_localization_node.cpp)
 
-add_executable(${PROJECT_NAME}_remote src/micro_uuv_rf_teleop_remote_node.cpp)
-add_dependencies(${PROJECT_NAME}_remote ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(${PROJECT_NAME}_remote
-  ${PROJECT_NAME}
-  ${catkin_LIBRARIES}
-  rf_comms
-)
+## Rename C++ executable without prefix
+## The above recommended prefix causes long target names, the following renames the
+## target back to the shorter version for ease of user use
+## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
+# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+
+## Add cmake target dependencies of the executable
+## same as for the library above
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -201,7 +195,7 @@ target_link_libraries(${PROJECT_NAME}_remote
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_micro_uuv_rf_teleop.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_micro_uuv_localization.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

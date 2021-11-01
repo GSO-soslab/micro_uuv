@@ -13,8 +13,12 @@ namespace soslab {
         m_ivp_helm_state_msg.header.seq = 0;
 
         // Publishers
-        m_nav_publisher = m_nh.advertise<micro_uuv_msgs::Nav>("pnav_state", 1000);
-        m_ivp_helm_state_publisher = m_nh.advertise<micro_uuv_msgs::IvpHelmState>("helm_state", 1000);
+
+        m_moos_debug_publisher = m_nh.advertise<micro_uuv_msgs::MoosDebug>("debug",100);
+        m_help_ivp_debug_publisher = m_nh.advertise<micro_uuv_msgs::MoosDebug>("helm/debug",100);
+        m_pnav_debug_publisher = m_nh.advertise<micro_uuv_msgs::MoosDebug>("pnav/debug", 100);
+        m_pnav_publisher = m_nh.advertise<micro_uuv_msgs::Nav>("pnav/position", 1000);
+        m_ivp_helm_state_publisher = m_nh.advertise<micro_uuv_msgs::IvpHelmState>("helm/state", 1000);
         m_imu_publisher = m_nh.advertise<sensor_msgs::Imu>("imu/data", 1000);
         m_gps_publisher = m_nh.advertise<micro_uuv_msgs::Gps>("gps",1000);
         m_fix_publisher = m_nh.advertise<sensor_msgs::NavSatFix>("fix",1000);
@@ -29,7 +33,7 @@ namespace soslab {
         m_wpt_service = m_nh.advertiseService("send_waypoint", &ROSNode::wayPointService, this);
         m_dep_service = m_nh.advertiseService("send_depth", &ROSNode::depthService, this);
         m_helm_state_service = m_nh.advertiseService("set_helm_state", &ROSNode::ivpHelmConditionService, this);
-        m_manual_overide_service = m_nh.advertiseService("set_manual_overide", &ROSNode::manualOverideService, this);
+        m_manual_override_service = m_nh.advertiseService("set_manual_override", &ROSNode::manualOverrideService, this);
         m_calibration_service = m_nh.advertiseService("start_calibration", &ROSNode::startCalibration, this);
 
 
@@ -105,8 +109,8 @@ namespace soslab {
         }
     }
 
-    bool ROSNode::manualOverideService(std_srvs::SetBool::Request &req, std_srvs::SetBool::Response &res) {
-        res.success = m_moosNode->publishManualOveride(req.data);
+    bool ROSNode::manualOverrideService(std_srvs::SetBool::Request &req, std_srvs::SetBool::Response &res) {
+        res.success = m_moosNode->publishManualOverride(req.data);
 
         return res.success;
     }
@@ -125,7 +129,7 @@ namespace soslab {
         m_nav_msg.heading = m_pool->nav.heading;
         m_nav_msg.speed = m_pool->nav.speed;
 
-        m_nav_publisher.publish(m_nav_msg);
+        m_pnav_publisher.publish(m_nav_msg);
     }
 
     void ROSNode::PublishImu() {
@@ -236,5 +240,29 @@ namespace soslab {
         m_pool->dvl.y = msg->report.vy;
         m_pool->dvl.z = msg->report.vz;
         m_moosNode->publishDvl();
+    }
+
+    void ROSNode::PublishHelmIvPDebug() {
+        micro_uuv_msgs::MoosDebug msg;
+        msg.source = m_pool->ivphelm_debug.source;
+        msg.msg = m_pool->ivphelm_debug.msg;
+        msg.header.stamp = ros::Time::now();
+        m_help_ivp_debug_publisher.publish(msg);
+    }
+
+    void ROSNode::PublishPNavDebug() {
+        micro_uuv_msgs::MoosDebug msg;
+        msg.source = m_pool->pnav_debug.source;
+        msg.msg = m_pool->pnav_debug.msg;
+        msg.header.stamp = ros::Time::now();
+        m_pnav_debug_publisher.publish(msg);
+    }
+
+    void ROSNode::PublishDebug() {
+        micro_uuv_msgs::MoosDebug msg;
+        msg.source = m_pool->other_debug.source;
+        msg.msg = m_pool->other_debug.msg;
+        msg.header.stamp = ros::Time::now();
+        m_moos_debug_publisher.publish(msg);
     }
 }

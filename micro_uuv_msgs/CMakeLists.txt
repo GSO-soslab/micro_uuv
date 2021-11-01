@@ -12,6 +12,7 @@ add_message_files(
     BoolMap.msg
     Gps.msg
     IvpHelmState.msg
+    MoosDebug.msg
     Nav.msg
     NMEA.msg
     Pressure.msg

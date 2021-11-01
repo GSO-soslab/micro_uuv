@@ -8,6 +8,7 @@ namespace soslab {
 
     void Process::Run(int argc, char* argv[])
     {
+
         char *missionFile;
         for(int c = 0; c != -1 ; c = getopt(argc, argv, "m:") )
         {
@@ -23,8 +24,8 @@ namespace soslab {
                     break;
             }
         }
-        ros::init(argc, argv, "irosbridge");
 
+        ros::init(argc, argv, "irosbridge");
         m_rosNode = std::make_shared<ROSNode>();
         m_moosNode = std::make_shared<MOOSNode>();
         m_pool = std::make_shared<pool_t>();

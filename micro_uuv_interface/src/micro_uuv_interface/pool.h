@@ -45,7 +45,6 @@ namespace soslab {
     } nav_t;
 
 #define TEST_NAV_FILL(o) \
-    o._fill.roll &         \
     o._fill.pitch &         \
     o._fill.yaw &         \
     o._fill.depth &       \
@@ -263,7 +262,6 @@ namespace soslab {
     w._fill.z
 
 
-
     typedef struct ivphelm_status_t {
         double time;
         std::string state;
@@ -278,6 +276,20 @@ namespace soslab {
         };
         fill_c _fill;
     } ivphelm_status_t;
+
+    typedef struct ivphelm_debug_msg_t {
+        std::string debug_msg;
+    } ivlhelm_debug_msg_t;
+
+    typedef struct pnav_debug_msg_t {
+        std::string debug_msg;
+    } pnav_debug_msg_t;
+
+    typedef struct debug_msg_t {
+        std::string msg;
+        std::string source;
+    } debug_msg_t;
+
 
 #define FLUSH_FILL(o) *((uint16_t*)&o._fill) = 0
 
@@ -303,6 +315,13 @@ namespace soslab {
         ivphelm_status_t helm_status;
 
         std::mutex lock;
+
+        debug_msg_t pnav_debug;
+
+        debug_msg_t ivphelm_debug;
+
+        debug_msg_t other_debug;
+
     } pool_t;
 }
 
